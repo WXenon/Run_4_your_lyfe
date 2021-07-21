@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.easyfitness.views.SingleValueInputView
+        <com.run4urlyfe.views.SingleValueInputView
             android:id="@+id/EditorValueDateInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -35,7 +35,7 @@
             tool:value="10/12/2020"
             tool:visibility="visible" />
 
-        <com.easyfitness.views.SingleValueInputView
+        <com.run4urlyfe.views.SingleValueInputView
             android:id="@+id/EditorValueTimeInput"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -50,7 +50,7 @@
             tool:visibility="visible" />
     </LinearLayout>
 
-    <com.easyfitness.views.SingleValueInputView
+    <com.run4urlyfe.views.SingleValueInputView
         android:id="@+id/EditorValueInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

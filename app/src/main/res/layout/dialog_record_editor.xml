@@ -15,7 +15,7 @@
         android:textColor="@color/orange"
         android:textSize="20sp" />
 
-    <com.easyfitness.views.WorkoutValuesInputView
+    <com.run4urlyfe.views.WorkoutValuesInputView
         android:id="@+id/EditorWorkoutValuesInput"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

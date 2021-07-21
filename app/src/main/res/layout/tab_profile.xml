@@ -63,7 +63,7 @@
                 android:orientation="vertical"
                 android:padding="6dip">
 
-                <com.easyfitness.views.EditableInputView
+                <com.run4urlyfe.views.EditableInputView
                     android:id="@+id/name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                     android:title="@string/enter_profile_name"
                     tools:text="Profile Name" />
 
-                <com.easyfitness.views.EditableInputView
+                <com.run4urlyfe.views.EditableInputView
                     android:id="@+id/gender"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                     android:textSize="18sp"
                     tools:text="Male" />
 
-                <com.easyfitness.views.EditableInputView
+                <com.run4urlyfe.views.EditableInputView
                     android:id="@+id/birthday"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

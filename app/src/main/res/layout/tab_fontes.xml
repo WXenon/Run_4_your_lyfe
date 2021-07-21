@@ -79,7 +79,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <com.easyfitness.views.WorkoutValuesInputView
+        <com.run4urlyfe.views.WorkoutValuesInputView
             android:id="@+id/WorkoutValuesInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -237,7 +237,7 @@
 
         </LinearLayout>
 
-        <com.easyfitness.utils.ExpandedListView
+        <com.run4urlyfe.utils.ExpandedListView
             android:id="@+id/listRecord"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

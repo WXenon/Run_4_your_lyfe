@@ -90,7 +90,7 @@
         android:visibility="visible">
 
         <!-- SETS -->
-        <com.easyfitness.views.SingleValueInputView
+        <com.run4urlyfe.views.SingleValueInputView
             android:id="@+id/SetsInputView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -104,7 +104,7 @@
             tools:visibility="visible" />
 
         <!-- REPS -->
-        <com.easyfitness.views.SingleValueInputView
+        <com.run4urlyfe.views.SingleValueInputView
             android:id="@+id/RepsInputView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -118,7 +118,7 @@
             tools:visibility="visible" />
 
         <!-- SECONDS -->
-        <com.easyfitness.views.SingleValueInputView
+        <com.run4urlyfe.views.SingleValueInputView
             android:id="@+id/SecondsInputView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -132,7 +132,7 @@
             tools:visibility="gone" />
 
         <!-- WEIGHT -->
-        <com.easyfitness.views.SingleValueInputView
+        <com.run4urlyfe.views.SingleValueInputView
             android:id="@+id/WeightInputView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -146,7 +146,7 @@
             tools:visibility="visible" />
 
         <!-- DISTANCE -->
-        <com.easyfitness.views.SingleValueInputView
+        <com.run4urlyfe.views.SingleValueInputView
             android:id="@+id/DistanceInputView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -160,7 +160,7 @@
             tools:visibility="gone" />
 
         <!-- DURATION -->
-        <com.easyfitness.views.SingleValueInputView
+        <com.run4urlyfe.views.SingleValueInputView
             android:id="@+id/DurationInputView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
