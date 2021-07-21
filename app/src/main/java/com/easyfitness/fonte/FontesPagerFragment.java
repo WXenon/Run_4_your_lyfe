@@ -104,11 +104,8 @@ public class FontesPagerFragment extends Fragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
-            // rafraichit le fragment courant
 
             if (getViewPagerAdapter() != null) {
-                // Moyen de rafraichir tous les fragments. Attention, les View des fragments peuvent avoir ete detruit.
-                // Il faut donc que cela soit pris en compte dans le refresh des fragments.
                 Fragment frag1;
                 for (int i = 0; i < 4; i++) {
                     frag1 = getViewPagerAdapter().getPage(i);

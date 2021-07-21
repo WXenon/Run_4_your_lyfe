@@ -38,9 +38,6 @@ public class MachineCursorAdapter extends CursorAdapter implements Filterable {
         TextView t1 = view.findViewById(R.id.LIST_MACHINE_NAME);
         t1.setText(cursor.getString(cursor.getColumnIndex(DAOMachine.NAME)));
 
-        TextView t2 = view.findViewById(R.id.LIST_MACHINE_SHORT_DESCRIPTION);
-        t2.setText(cursor.getString(cursor.getColumnIndex(DAOMachine.DESCRIPTION)));
-
         ImageView i0 = view.findViewById(R.id.LIST_MACHINE_PHOTO);
         String lPath = cursor.getString(cursor.getColumnIndex(DAOMachine.PICTURE));
 
@@ -74,7 +71,6 @@ public class MachineCursorAdapter extends CursorAdapter implements Filterable {
             i0.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         }
 
-        iFav = view.findViewById(R.id.LIST_MACHINE_FAVORITE);
         boolean bFav = cursor.getInt(6) == 1;
         iFav.setFavorite(bFav);
         iFav.setRotationDuration(500);
@@ -95,7 +91,7 @@ public class MachineCursorAdapter extends CursorAdapter implements Filterable {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return mInflater.inflate(R.layout.exercise_list_row, parent, false);
+        return null;
 
     }
 

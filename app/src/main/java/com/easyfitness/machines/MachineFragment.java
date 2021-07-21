@@ -27,20 +27,7 @@ import com.easyfitness.enums.ExerciseType;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MachineFragment extends Fragment {
-    private final OnItemClickListener onClickListItem = (parent, view, position, id) -> {
-        // Get Machine Name selected
-        TextView textViewID = view.findViewById(R.id.LIST_MACHINE_ID);
-        long machineId = Long.parseLong(textViewID.getText().toString());
 
-        ExerciseDetailsPager machineDetailsFragment = ExerciseDetailsPager.newInstance(machineId, ((MainActivity) getActivity()).getCurrentProfile().getId());
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
-        transaction.replace(R.id.fragment_container, machineDetailsFragment, MainActivity.MACHINESDETAILS);
-        transaction.addToBackStack(null);
-        // Commit the transaction
-        transaction.commit();
-    };
     private final View.OnClickListener clickAddButton = v -> {
 
         // create a temporarily exercise with name="" and open it like any other existing exercises
@@ -60,11 +47,9 @@ public class MachineFragment extends Fragment {
                     long temp_machine_key = lDAOMachine.addMachine(pMachine, "", ExerciseType.STRENGTH, "", false, "");
                     sDialog.dismissWithAnimation();
 
-                    ExerciseDetailsPager machineDetailsFragment = ExerciseDetailsPager.newInstance(temp_machine_key, ((MainActivity) getActivity()).getCurrentProfile().getId());
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     // Replace whatever is in the fragment_container view with this fragment,
                     // and add the transaction to the back stack so the user can navigate back
-                    transaction.replace(R.id.fragment_container, machineDetailsFragment, MainActivity.MACHINESDETAILS);
                     transaction.addToBackStack(null);
                     // Commit the transaction
                     transaction.commit();
@@ -75,11 +60,9 @@ public class MachineFragment extends Fragment {
                     long temp_machine_key = lDAOMachine.addMachine(pMachine, "", ExerciseType.ISOMETRIC, "", false, "");
                     sDialog.dismissWithAnimation();
 
-                    ExerciseDetailsPager machineDetailsFragment = ExerciseDetailsPager.newInstance(temp_machine_key, ((MainActivity) getActivity()).getCurrentProfile().getId());
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     // Replace whatever is in the fragment_container view with this fragment,
                     // and add the transaction to the back stack so the user can navigate back
-                    transaction.replace(R.id.fragment_container, machineDetailsFragment, MainActivity.MACHINESDETAILS);
                     transaction.addToBackStack(null);
                     // Commit the transaction
                     transaction.commit();
@@ -90,11 +73,9 @@ public class MachineFragment extends Fragment {
                     long temp_machine_key = lDAOMachine.addMachine(pMachine, "", ExerciseType.CARDIO, "", false, "");
                     sDialog.dismissWithAnimation();
 
-                    ExerciseDetailsPager machineDetailsFragment = ExerciseDetailsPager.newInstance(temp_machine_key, ((MainActivity) getActivity()).getCurrentProfile().getId());
                     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                     // Replace whatever is in the fragment_container view with this fragment,
                     // and add the transaction to the back stack so the user can navigate back
-                    transaction.replace(R.id.fragment_container, machineDetailsFragment, MainActivity.MACHINESDETAILS);
                     transaction.addToBackStack(null);
                     // Commit the transaction
                     transaction.commit();
@@ -185,7 +166,6 @@ public class MachineFragment extends Fragment {
         searchField.addTextChangedListener(onTextChangeListener);
 
         machineList = view.findViewById(R.id.listMachine);
-        machineList.setOnItemClickListener(onClickListItem);
 
         // Initialisation de l'historique
         mDbMachine = new DAOMachine(getContext());

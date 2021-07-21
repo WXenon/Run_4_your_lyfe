@@ -42,18 +42,11 @@ public class MachineArrayFullAdapter extends ArrayAdapter<Machine> {
         Machine machine = getItem(position);
         if (machine == null) return convertView;
 
-        // Check if an existing view is being reused, otherwise inflate the view
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.exercise_list_row, parent, false);
-        }
         TextView t0 = convertView.findViewById(R.id.LIST_MACHINE_ID);
         t0.setText(String.valueOf(machine.getId()));
 
         TextView t1 = convertView.findViewById(R.id.LIST_MACHINE_NAME);
         t1.setText(machine.getName());
-
-        TextView t2 = convertView.findViewById(R.id.LIST_MACHINE_SHORT_DESCRIPTION);
-        t2.setText(machine.getDescription());
 
         ImageView i0 = convertView.findViewById(R.id.LIST_MACHINE_PHOTO);
         String lPath = machine.getPicture();
@@ -72,8 +65,6 @@ public class MachineArrayFullAdapter extends ArrayAdapter<Machine> {
             i0.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         }
 
-        MaterialFavoriteButton iFav = convertView.findViewById(R.id.LIST_MACHINE_FAVORITE);
-        iFav.setFavorite(machine.getFavorite());
         return convertView;
     }
 

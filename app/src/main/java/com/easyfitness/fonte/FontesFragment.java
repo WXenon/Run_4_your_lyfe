@@ -56,7 +56,6 @@ import com.easyfitness.enums.DisplayType;
 import com.easyfitness.enums.DistanceUnit;
 import com.easyfitness.enums.ExerciseType;
 import com.easyfitness.enums.WeightUnit;
-import com.easyfitness.machines.ExerciseDetailsPager;
 import com.easyfitness.machines.MachineArrayFullAdapter;
 import com.easyfitness.machines.MachineCursorAdapter;
 import com.easyfitness.utils.DateConverter;
@@ -540,11 +539,9 @@ public class FontesFragment extends Fragment {
         machineImage.setOnClickListener(v -> {
             Machine m = mDbMachine.getMachine(machineEdit.getText().toString());
             if (m != null) {
-                ExerciseDetailsPager machineDetailsFragment = ExerciseDetailsPager.newInstance(m.getId(), ((MainActivity) getActivity()).getCurrentProfile().getId());
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 // Replace whatever is in the fragment_container view with this fragment,
                 // and add the transaction to the back stack so the user can navigate back
-                transaction.replace(R.id.fragment_container, machineDetailsFragment, MainActivity.MACHINESDETAILS);
                 transaction.addToBackStack(null);
                 // Commit the transaction
                 transaction.commit();

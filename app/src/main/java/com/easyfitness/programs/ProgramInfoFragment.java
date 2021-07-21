@@ -44,26 +44,6 @@ public class ProgramInfoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.tab_program_details, container, false);
-
-        nameEdit = view.findViewById(R.id.workout_name);
-        descriptionEdit = view.findViewById(R.id.workout_description);
-
-        long workoutID = getArguments().getLong("templateId", -1);
-
-        mDb = new DAOProgram(getContext());
-        mProgram = mDb.get(workoutID);
-        nameEdit.setText(mProgram.getName());
-        descriptionEdit.setText(mProgram.getDescription());
-
-        return view;
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
 
@@ -85,18 +65,6 @@ public class ProgramInfoFragment extends Fragment {
 
     private void requestForSave(View view) {
         boolean toUpdate = false;
-
-        // Save all the fields in the Profile
-        switch (view.getId()) {
-            case R.id.workout_name:
-                mProgram.setName(nameEdit.getText());
-                toUpdate = true;
-                break;
-            case R.id.workout_description:
-                mProgram.setDescription(descriptionEdit.getText());
-                toUpdate = true;
-                break;
-        }
 
         if (toUpdate) {
             mDb.update(mProgram);

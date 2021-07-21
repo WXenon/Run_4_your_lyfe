@@ -1,10 +1,7 @@
 package com.easyfitness;
 
-import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -22,14 +19,10 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -58,10 +51,7 @@ import com.easyfitness.enums.WeightUnit;
 import com.easyfitness.fonte.FontesPagerFragment;
 import com.easyfitness.intro.MainIntroActivity;
 import com.easyfitness.machines.MachineFragment;
-import com.easyfitness.programs.ProgramListFragment;
-import com.easyfitness.utils.CustomExceptionHandler;
 import com.easyfitness.utils.DateConverter;
-import com.easyfitness.utils.FileChooserDialog;
 import com.easyfitness.utils.ImageUtil;
 import com.easyfitness.utils.MusicController;
 import com.easyfitness.utils.UnitConverter;
@@ -70,17 +60,10 @@ import com.onurkaganaldemir.ktoastlib.KToast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Locale;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -120,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
     private SettingsFragment mpSettingFrag = null;
     private AboutFragment mpAboutFrag = null;
     private BodyPartListFragment mpBodyPartListFrag = null;
-    private ProgramListFragment mpWorkoutListFrag;
     private String currentFragmentName = "";
     private DAOProfile mDbProfils = null;
     private Profile mCurrentProfile = null;
@@ -256,8 +238,6 @@ public class MainActivity extends AppCompatActivity {
             if (mpMachineFrag == null) mpMachineFrag = MachineFragment.newInstance(MACHINES, 7);
             if (mpBodyPartListFrag == null)
                 mpBodyPartListFrag = BodyPartListFragment.newInstance(BODYTRACKING, 9);
-            if (mpWorkoutListFrag == null)
-                mpWorkoutListFrag = ProgramListFragment.newInstance(WORKOUTS, 11);
         } else {
             mpFontesPagerFrag = (FontesPagerFragment) getSupportFragmentManager().getFragment(savedInstanceState, FONTESPAGER);
             mpWeightFrag = (WeightFragment) getSupportFragmentManager().getFragment(savedInstanceState, WEIGHT);
@@ -266,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
             mpAboutFrag = (AboutFragment) getSupportFragmentManager().getFragment(savedInstanceState, ABOUT);
             mpMachineFrag = (MachineFragment) getSupportFragmentManager().getFragment(savedInstanceState, MACHINES);
             mpBodyPartListFrag = (BodyPartListFragment) getSupportFragmentManager().getFragment(savedInstanceState, BODYTRACKING);
-            mpWorkoutListFrag = (ProgramListFragment) getSupportFragmentManager().getFragment(savedInstanceState, WORKOUTS);
         }
 
         appViMo = new ViewModelProvider(this).get(AppViMo.class);
@@ -329,8 +308,6 @@ public class MainActivity extends AppCompatActivity {
 
         dataList.add(drawerTitleItem);
         dataList.add(new DrawerItem(this.getResources().getString(R.string.menu_Workout), R.drawable.ic_fitness_center, true));
-        dataList.add(new DrawerItem(this.getResources().getString(R.string.MachinesLabel), R.drawable.ic_exercises, true));
-        dataList.add(new DrawerItem("Programs List", R.drawable.ic_exam, true));
         dataList.add(new DrawerItem(this.getResources().getString(R.string.weightMenuLabel), R.drawable.ic_bathroom_scale, true));
         dataList.add(new DrawerItem(this.getResources().getString(R.string.bodytracking), R.drawable.ic_ruler, true));
         dataList.add(new DrawerItem(this.getResources().getString(R.string.SettingLabel), R.drawable.ic_settings, true));
@@ -358,8 +335,6 @@ public class MainActivity extends AppCompatActivity {
 
         musicController.initView();
 
-        // Lance l'intro
-        // Tester si l'intro a déjà été lancé
         if (!mIntro014Launched) {
             Intent intent = new Intent(this, MainIntroActivity.class);
             startActivityForResult(intent, REQUEST_CODE_INTRO);
@@ -460,8 +435,6 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().putFragment(outState, SETTINGS, mpSettingFrag);
         if (getBodyPartFragment().isAdded())
             getSupportFragmentManager().putFragment(outState, BODYTRACKING, mpBodyPartListFrag);
-        if (getWorkoutListFragment().isAdded())
-            getSupportFragmentManager().putFragment(outState, WORKOUTS, mpWorkoutListFrag);
     }
 
     @Override
@@ -689,6 +662,7 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
         // If request is cancelled, the result arrays are empty.
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE_FOR_EXPORT) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -839,8 +813,6 @@ public class MainActivity extends AppCompatActivity {
             ft.replace(R.id.fragment_container, getSettingsFragment(), SETTINGS);
         } else if (pFragmentName.equals(MACHINES)) {
             ft.replace(R.id.fragment_container, getMachineFragment(), MACHINES);
-        } else if (pFragmentName.equals(WORKOUTS)) {
-            ft.replace(R.id.fragment_container, getWorkoutListFragment(), WORKOUTS);
         } else if (pFragmentName.equals(ABOUT)) {
             ft.replace(R.id.fragment_container, getAboutFragment(), ABOUT);
         } else if (pFragmentName.equals(BODYTRACKING)) {
@@ -970,16 +942,6 @@ public class MainActivity extends AppCompatActivity {
         return mpBodyPartListFrag;
     }
 
-
-    private ProgramListFragment getWorkoutListFragment() {
-        if (mpWorkoutListFrag == null)
-            mpWorkoutListFrag = (ProgramListFragment) getSupportFragmentManager().findFragmentByTag(WORKOUTS);
-        if (mpWorkoutListFrag == null)
-            mpWorkoutListFrag = ProgramListFragment.newInstance(WORKOUTS, 10);
-
-        return mpWorkoutListFrag;
-    }
-
     private SettingsFragment getSettingsFragment() {
         if (mpSettingFrag == null)
             mpSettingFrag = (SettingsFragment) getSupportFragmentManager().findFragmentByTag(SETTINGS);
@@ -1104,26 +1066,18 @@ public class MainActivity extends AppCompatActivity {
                     setTitle(getResources().getText(R.string.menu_Workout));
                     break;
                 case 2:
-                    showFragment(MACHINES);
-                    setTitle(getResources().getText(R.string.MachinesLabel));
-                    break;
-                case 3:
-                    showFragment(WORKOUTS);
-                    setTitle(getString(R.string.workout_list_menu_item));
-                    break;
-                case 4:
                     showFragment(WEIGHT);
                     setTitle(getResources().getText(R.string.weightMenuLabel));
                     break;
-                case 5:
+                case 3:
                     showFragment(BODYTRACKING);
                     setTitle(getResources().getText(R.string.bodytracking));
                     break;
-                case 6:
+                case 4:
                     showFragment(SETTINGS);
                     setTitle(getResources().getText(R.string.SettingLabel));
                     break;
-                case 7:
+                case 5:
                     showFragment(ABOUT);
                     setTitle(getResources().getText(R.string.AboutLabel));
                     break;
